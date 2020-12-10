@@ -2,24 +2,25 @@ const { loader } = require("../src/utils")
 const fs = require("fs")
 
 const achieved = JSON.parse(fs.readFileSync("src/achieved.json", "utf8"))
+const maxCol = 8;
 
 let years = ""
 for (const year in achieved) {
     let table = ""
     let completed = 0
 
-    for (let day = 1; day < 25; day++) {
+    for (let day = 1; day <= 25; day++) {
         let stars = 0
         if (achieved[year].hasOwnProperty(day))
             stars = achieved[year][day]
 
         completed += stars
         table += `|**${day}: ` + "🌟".repeat(stars) + "**"
-        if (day % 6 == 0) table += "|\n"
-        if (day == 6) table += "|---".repeat(6) + "|\n"
+        if (day % maxCol == 0) table += "|\n"
+        if (day == maxCol) table += "|---".repeat(maxCol) + "|\n"
     }
 
-    years += `## ${year} \n\n🌟 ${completed}/50 \n\n${table} \n`
+    years += `## ${year} \n\n🌟 ${completed}/50 \n\n${table}| \n`
 }
 
 let text = `
