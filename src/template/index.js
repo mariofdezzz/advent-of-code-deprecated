@@ -2,12 +2,13 @@ const { parseData } = require("../../utils")
 
 const data = parseData(__dirname)
 
+
 const part1 = (input) => {
-  return
+    return
 }
 
 const part2 = (input) => {
-  return
+    return
 }
 
 
