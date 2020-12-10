@@ -2,7 +2,7 @@ const { loader } = require("../src/utils")
 const fs = require("fs")
 
 const achieved = JSON.parse(fs.readFileSync("src/achieved.json", "utf8"))
-const maxCol = 8;
+const maxCol = 10;
 
 let years = ""
 for (const year in achieved) {
