@@ -1,0 +1,13 @@
+{
+  "name": "advent-of-code",
+  "author": "mariofdezzz",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./scripts/start.js"
+  },
+  "dependencies": {
+    "nodemon": "^2.0.6",
+    "shelljs": "^0.8.4"
+  }
+}
