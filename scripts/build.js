@@ -15,7 +15,9 @@ for (const year in achieved) {
             stars = achieved[year][day]
 
         completed += stars
-        table += `|**${day}: ` + "🌟".repeat(stars) + "**"
+        if (stars) table += `|**${day}: ` + "🌟".repeat(stars) + "**"
+        else table += `|**${day}:**`
+        
         if (day % maxCol == 0) table += "|\n"
         if (day == maxCol) table += "|---".repeat(maxCol) + "|\n"
     }
