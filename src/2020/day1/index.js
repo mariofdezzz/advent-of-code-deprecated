@@ -4,17 +4,18 @@ const data = parseData(__dirname)
 const target = 2020;
 const table = (input) => 
     input.reduce((acc, item) => {
-        acc[item] = item;
-        return acc;
-    }, {});
+        acc[item] = item
+        return acc
+    }, {})
 
 
 // Cost O(n)
 const part1 = (input, dict) => {
     for (const el of input)
         if (dict.hasOwnProperty(target - el))
-            if (target - el != el) return (target - el) * el;
-    return "Not found";
+            if (target - el != el) return (target - el) * el
+
+    return "Not found"
 }
 
 // Cost O(n^2)
@@ -27,8 +28,9 @@ const part2 = (input, dict) => {
                     target - elA - elB != elB &&
                     elA != elB
                 )
-                    return (target - elA - elB) * elA * elB;
-    return "Not found";
+                    return (target - elA - elB) * elA * elB
+
+    return "Not found"
 }
 
 
