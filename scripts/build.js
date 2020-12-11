@@ -15,8 +15,9 @@ for (const year in achieved) {
             stars = achieved[year][day]
 
         completed += stars
-        if (stars) table += `|**${day}: ` + "🌟".repeat(stars) + "**"
-        else table += `|**${day}:**`
+        table += `|**${day}: ` + 
+            "🌟".repeat(stars) + 
+            "🔒".repeat(2 - stars) + "**"
         
         if (day % maxCol == 0) table += "|\n"
         if (day == maxCol) table += "|---".repeat(maxCol) + "|\n"
@@ -36,3 +37,23 @@ fs.writeFile("README.md", text, (err) => {
     if (err) throw err
     console.timeEnd("README created in")
 })
+
+
+/* FEATURE
+// ---- achieved.json ----
+readFile("src/achieved.json", "utf8", (err, res) => {
+    if (err) throw err;
+
+    let achieved = JSON.parse(res);
+    let day = __dirname.match(/\d+$/)
+    if (result1) {
+        if (result2) achieved["2020"][day] = 2
+        else achieved["2020"][day] = 1
+    }
+    writeFile("src/achieved.json",
+        JSON.stringify(achieved), 
+        "utf8", 
+        (err) => {if (err) throw err}
+    )
+})
+*/

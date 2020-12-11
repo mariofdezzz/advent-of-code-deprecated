@@ -15,8 +15,8 @@ const part2 = (input) => {
 /* Results */
 
 console.time("Time")
-const result1 = part1(data.input)
-const result2 = part2(data.input)
+const result1 = part1(data.test)
+const result2 = part2(data.test)
 console.timeEnd("Time")
 
 console.log("Solution to part 1:", result1)
