@@ -1,5 +1,4 @@
-
-# 🌠 Advent Of Code 
+# 🌠 Advent Of Code
 🎄 Christmas hobby made with JavaScript
 
 ## 2020 
