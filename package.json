@@ -1,14 +1,26 @@
 {
-  "name": "advent-of-code",
-  "author": "mariofdezzz",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "aoc-npm-template",
+  "version": "0.1.0",
+  "description": "Node.js template for solving Advent Of Code problems",
+  "main": "",
   "scripts": {
     "start": "node ./scripts/start.js",
-    "build": "node ./scripts/build.js"
+    "build": "node ./scripts/build.js",
+    "init": "node ./scripts/init.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "aoc-npm-template"
+  },
+  "author": "mariofdezzz",
+  "license": "MIT",
   "dependencies": {
+    "inquirer": "^7.3.3",
+    "module-alias": "^2.2.2",
     "nodemon": "^2.0.6",
     "shelljs": "^0.8.4"
+  },
+  "_moduleAliases": {
+    "@utils": "public/utils"
   }
 }

@@ -1,4 +1,6 @@
-const fs = require("fs")
+const { writeFileSync,readFileSync } = require("fs")
+
+const config = JSON.parse(readFileSync("public/settings.json").toString())
 
 const readme = (achieved) => {
     const maxCol = 9;
@@ -25,11 +27,11 @@ const readme = (achieved) => {
         years += `## ${year} \n\n🌟 ${completed}/50 \n\n${table}| \n`
     }
 
-    let text = "# 🌠 Advent Of Code\n"+
-        "🎄 Christmas hobby made with JavaScript\n\n"+
+    let text = `# ${config.name}\n` +
+        `${config.description}\n\n` +
         `${years}`
     
-    fs.writeFileSync("README.md", text)
+    writeFileSync("README.md", text)
 }
 
 module.exports = readme

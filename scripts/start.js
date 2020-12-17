@@ -1,24 +1,63 @@
 const os = require("os")
 const { spawn } = require("child_process")
-const { readdirSync } = require("fs")
+const { existsSync, readdirSync, readFileSync } = require("fs")
 const { cp, mkdir } = require("shelljs")
 
-const day = process.argv[2]
-const years = readdirSync("./src")
+/* --- Start --- */
+const start = () => {
+    /* --- Data --- */
+    const config = JSON.parse(readFileSync("public/settings.json").toString())
+    const day = process.argv[2]
 
-if (!years.includes("2020")) {
-    mkdir("src/2020")
+    /* --- Path Check --- */
+    if (!existsSync("./src")) mkdir("src")
+
+    const years = readdirSync("./src")
+
+    if (!years.includes(config.year)) mkdir(`src/${config.year}`)
+
+    const days = readdirSync(`src/${config.year}`)
+
+    /* --- Template --- */
+    if (!days.includes(day)) {
+        console.log(`\x1b[36mCreating file structure for ${day}... \x1b[0m`)
+        cp(
+            "-r",
+            `public/template/${config.compiler}`,
+            `src/${config.year}/${day}`
+        )
+    }
+
+    /* --- Execution --- */
+    const nodemonExecutablePath =
+        os.platform() === "win32"
+            ? "node_modules\\.bin\\nodemon.cmd"
+            : "nodemon"
+
+    spawn(
+        nodemonExecutablePath,
+        [
+            "--quiet",
+            "-e",
+            "js,txt",
+            `scripts/launch.js`,
+            `src/${config.year}/${day}`,
+        ],
+        {
+            stdio: "inherit",
+        }
+    )
 }
-const days = readdirSync("./src/2020")
 
-if (!days.includes(day)) {
-    console.log(`Creating file structure for ${day}...`)
-    cp("-r", "src/template", `src/2020/${day}`)
+/* --- Config --- */
+if (!existsSync("public/settings.json")) {
+    const init = spawn("npm", ["run", "init"], {
+        shell: true,
+        stdio: "inherit",
+    })
+    init.on("close", () => {
+        start()
+    })
+} else {
+    start()
 }
-
-const nodemonExecutablePath =
-    os.platform() === "win32" ? "node_modules\\.bin\\nodemon.cmd" : "nodemon"
-
-spawn(nodemonExecutablePath, [`src/2020/${day}/index.js`], {
-    stdio: "inherit",
-})

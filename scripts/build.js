@@ -1,4 +1,5 @@
-const { achieved, readme } = require("../src/utils")
+require('module-alias/register')
+const { achieved, readme } = require("@utils")
 
 console.time("README generated in")
 readme(achieved())

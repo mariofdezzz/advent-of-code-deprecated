@@ -1,13 +1,40 @@
-const { parseData } = require("../../utils")
-const { part1, part2 } = require("./code")
+const target = 2020
+const table = (input) =>
+    input.reduce((acc, item) => {
+        acc[item] = item
+        return acc
+    }, {})
 
-const data = parseData(__dirname)
+// Cost O(n)
+const part1 = (data) => {
+    let input = data.input
+    
+    let dict = table(input)
+    for (const el of input)
+        if (dict.hasOwnProperty(target - el))
+            if (target - el != el) return (target - el) * el
 
-// === Results ===
-console.time("Time")
-const result1 = part1(data.input)
-const result2 = part2(data.input)
-console.timeEnd("Time")
+    return "Not found"
+}
 
-console.log("Solution to part 1:", result1)
-console.log("Solution to part 2:", result2)
+const part2 = (data) => {
+    let input = data.input
+    
+    let dict = table(input)
+    for (const elA of input)
+        for (const elB of input)
+            if (dict.hasOwnProperty(target - elA - elB))
+                if (
+                    target - elA - elB != elA &&
+                    target - elA - elB != elB &&
+                    elA != elB
+                )
+                    return (target - elA - elB) * elA * elB
+
+    return "Not found"
+}
+
+module.exports = {
+    part1,
+    part2
+}

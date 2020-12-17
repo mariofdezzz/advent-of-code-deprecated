@@ -1,6 +1,6 @@
 const { readdirSync } = require("fs")
 const parseData = require("./parseData")
-const src = "../"
+const src = "../../src/"
 
 const achieved = () => {
     const list = {};
@@ -8,14 +8,14 @@ const achieved = () => {
     
     years.forEach( year => {
         list[year] = {}
-        days = readdirSync("./src/"+ year)
+        days = readdirSync("src/"+ year)
     
         days.forEach( day => {
             let number = day.match(/\d+/)
             let path = src + year +"/"+ day
             let count = 0
 
-            const { part1, part2 }= require(path + "/code.js")
+            const { part1, part2 }= require(path)
             const data = parseData("src/" + year +"/"+ day)
     
             if (part1(data.input)) ++count

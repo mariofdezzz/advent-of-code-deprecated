@@ -1,4 +1,4 @@
-const { readFileSync, writeFileSync } = require("fs")
+const { readFileSync } = require("fs")
 const { sep } = require("path")
 
 const parseData = (path) => {
