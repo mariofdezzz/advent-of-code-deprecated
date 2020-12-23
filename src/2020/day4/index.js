@@ -1,11 +1,26 @@
-let mandatories = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
+const mandatories = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"];
+const parse = (data) => {
+    res = []
+    acc = []
+
+    data.forEach((el) => {
+        if (el === "") {
+            res.push(acc)
+            acc = []
+        } else {
+            acc.push(...el.split(' '))
+        }
+    })
+    res.push(acc)
+    return res
+}
 
 // Cost O(N)
 const part1 = (data) => {
-    let input = data.input
-    
-    input = input.map((el) =>
-        el.map((line) => line.match(/[a-z]+/i)[0])
+    let input = parse(data.input)
+
+    input = input.map( el =>
+        el.map( line => line.match(/[a-z]+/i)[0] )
     )
     
     let count = 0;
@@ -17,7 +32,7 @@ const part1 = (data) => {
 
 // Cost O(N)
 const part2 = (data) => {
-    let input = data.input
+    let input = parse(data.input)
     
     let list = input.map((el) =>
         el.map((line) => line.match(/[a-z]+/i)[0])
